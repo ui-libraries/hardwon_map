@@ -150,10 +150,11 @@
   <script type="text/javascript">
     var map = L.map('map').setView([42.0667, -93.4], 8);
 
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-      maxZoom: 12,
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    	subdomains: 'abcd',
+    	maxZoom: 12,
       minZoom: 8,
-      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
     /*
         // Hydda basemap no longer works
