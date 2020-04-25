@@ -65,7 +65,7 @@
 
     #map {
       position: fixed;
-      top: 125px;
+      top: 0px;
       bottom: 0px;
       width: 100%;
       background: white;
@@ -104,11 +104,11 @@
     }
 
     .legend i {
-        width: 50px;
-        height: 18px;
-        float: left;
-        margin-right: 25px;
-        opacity: 0.7;
+      width: 50px;
+      height: 18px;
+      float: left;
+      margin-right: 25px;
+      opacity: 0.7;
     }
 
     .leaflet-control-layers-expanded {
@@ -118,17 +118,19 @@
     }
 
     .leaflet-popup-content {
-        min-width: 350px;
+      min-width: 350px;
     }
   </style>
 </head>
 
 <body>
+  <!-- Remove header
   <header>
     <h1>Representation of Women in the Iowa House and Senate: 1929-PRESENT</h1><br>
     <h4>Map by <a target='blank' href='https://jebowe3.github.io/Map-Portfolio/'>Jay Bowen</a>, 2020 | Background image, <a target='blank' href='https://digital.lib.uiowa.edu/islandora/object/ui:suffrage_1540'>"Iowa Suffrage Memorial"</a> by Nellie Walker
     </h4>
   </header>
+-->
 
   <div id="map"></div>
   <!-- ui slider -->
@@ -142,40 +144,44 @@
   </div>
   <!-- end temporal -->
 
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-  crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script type="text/javascript">
-
     var map = L.map('map').setView([42.0667, -93.4], 8);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-      attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
       maxZoom: 12,
       minZoom: 8,
+      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map);
-
+    /*
+        // Hydda basemap no longer works
+        L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+          attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 12,
+          minZoom: 8,
+        }).addTo(map);
+    */
     // Add a function to style the counties by their count of female house members
     function getColor(d) {
-      return d > 13.00  ? '#0f3034' :
-           d > 9.00  ? '#1C3F44' :
-           d > 5.00   ? '#30555A' :
-           d > 3.00   ? '#466A6F' :
-           d > 2.00   ? '#668488' :
-           d > 1.00   ? '#8BA0A2' :
-           d > 0.00   ? '#C4CED0' :
-                      '#1C00ff00';
+      return d > 13.00 ? '#0f3034' :
+        d > 9.00 ? '#1C3F44' :
+        d > 5.00 ? '#30555A' :
+        d > 3.00 ? '#466A6F' :
+        d > 2.00 ? '#668488' :
+        d > 1.00 ? '#8BA0A2' :
+        d > 0.00 ? '#C4CED0' :
+        '#1C00ff00';
     }
 
     // Add a function to style the counties by their count of female senate members
     function getColorSenate(d) {
-      return d > 3.00   ? '#466A6F' :
-           d > 2.00   ? '#668488' :
-           d > 1.00   ? '#8BA0A2' :
-           d > 0.00   ? '#C4CED0' :
-                      '#1C00ff00';
+      return d > 3.00 ? '#466A6F' :
+        d > 2.00 ? '#668488' :
+        d > 1.00 ? '#8BA0A2' :
+        d > 0.00 ? '#C4CED0' :
+        '#1C00ff00';
     }
 
     // load the data asynchronously
@@ -187,77 +193,79 @@
     // define drawMap function
     function drawMap(err, houseCounties, senateCounties) {
 
-        // give the layer some default properties
-        var houseWomen = L.geoJson(houseCounties, {
-          style: function(feature) {
-            return {
-              stroke: 1,
-              color: 'grey',
-              strokeOpacity: 1.0,
-              weight: 1.0,
-              fillOpacity: 0.7
-            }
-          },
-        }).addTo(map); // add house layer to the map
-
-        // give the layer some default properties
-        var senateWomen = L.geoJson(senateCounties, {
-          style: function(feature) {
-            return {
-              stroke: 1,
-              color: 'grey',
-              strokeOpacity: 1.0,
-              weight: 1.0,
-              fillOpacity: 0.7
-            }
+      // give the layer some default properties
+      var houseWomen = L.geoJson(houseCounties, {
+        style: function(feature) {
+          return {
+            stroke: 1,
+            color: 'grey',
+            strokeOpacity: 1.0,
+            weight: 1.0,
+            fillOpacity: 0.7
           }
-        });
+        },
+      }).addTo(map); // add house layer to the map
 
-        // define currentYear as the dynamic slider entry
-        var currentYear = $('.slider').val();
+      // give the layer some default properties
+      var senateWomen = L.geoJson(senateCounties, {
+        style: function(feature) {
+          return {
+            stroke: 1,
+            color: 'grey',
+            strokeOpacity: 1.0,
+            weight: 1.0,
+            fillOpacity: 0.7
+          }
+        }
+      });
 
-        sequenceUI(houseWomen, senateWomen); // calls the function to make the time slider
-        createTemporalLegend(currentYear); // produces temporal legend upon map loading
-        updateCounties(houseWomen, senateWomen, currentYear); // calls the function that updates the counties choropleth
+      // define currentYear as the dynamic slider entry
+      var currentYear = $('.slider').val();
 
-        // define layers
-        var baselayers = {
-          "Iowa House": houseWomen,
-          "Iowa Senate": senateWomen,
-        };
-/*
-        // define an overlay
-        var overlays = {
-          "Iowa House": houseWomen,
-          "Iowa Senate": senateWomen,
-        };
-*/
-        // send the layer to the layer control
-        L.control.layers(baselayers, null, {
-          collapsed: false,
-        }).addTo(map);
+      sequenceUI(houseWomen, senateWomen); // calls the function to make the time slider
+      createTemporalLegend(currentYear); // produces temporal legend upon map loading
+      updateCounties(houseWomen, senateWomen, currentYear); // calls the function that updates the counties choropleth
 
-        map.fitBounds(houseWomen.getBounds());
+      // define layers
+      var baselayers = {
+        "Iowa House": houseWomen,
+        "Iowa Senate": senateWomen,
+      };
+      /*
+              // define an overlay
+              var overlays = {
+                "Iowa House": houseWomen,
+                "Iowa Senate": senateWomen,
+              };
+      */
+      // send the layer to the layer control
+      L.control.layers(baselayers, null, {
+        collapsed: false,
+      }).addTo(map);
 
-        var legend = L.control({position: 'bottomright'});
+      map.fitBounds(houseWomen.getBounds());
 
-        legend.onAdd = function (map) {
+      var legend = L.control({
+        position: 'bottomright'
+      });
 
-            var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0.00, 1.00, 2.00, 3.00, 5.00, 9.00, 13.00],
-                labels = ["<h6 style='font-size:14px; font-weight:bold'>Total Representatives</h6>"];
+      legend.onAdd = function(map) {
 
-            // loop through our density intervals and generate a label with a colored square for each interval
-            for (var i = 0; i < grades.length; i++) {
-                div.innerHTML +=
-                labels.push('<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] : '+'));
-            }
-            div.innerHTML = labels.join('<br>');
-            return div;
-        };
+        var div = L.DomUtil.create('div', 'info legend'),
+          grades = [0.00, 1.00, 2.00, 3.00, 5.00, 9.00, 13.00],
+          labels = ["<h6 style='font-size:14px; font-weight:bold'>Total Representatives</h6>"];
 
-        legend.addTo(map);
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+            labels.push('<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] : '+'));
+        }
+        div.innerHTML = labels.join('<br>');
+        return div;
+      };
+
+      legend.addTo(map);
 
     }; // end drawMap function
 
@@ -327,14 +335,16 @@
         var props = layer.feature.properties
 
         layer.bindPopup("<h5 style='font-size:18px'>" + props.COUNTY + " County, " + currentYear + "</h5>" +
-                          "<h6 style='font-size:14px'>Total House Representatives: " + props[currentYear + '_RUNNING'] + "</h6>" +
-                          "<h6 style='font-size:12px'>" + props[currentYear + '_REPS_RUNNING'] + "</h6>"
-                          );
-        layer.on('click', function (e) {
+          "<h6 style='font-size:14px'>Total House Representatives: " + props[currentYear + '_RUNNING'] + "</h6>" +
+          "<h6 style='font-size:12px'>" + props[currentYear + '_REPS_RUNNING'] + "</h6>"
+        );
+        layer.on('click', function(e) {
           this.openPopup();
         });
 
-        layer.setStyle({fillColor: getColor(props[currentYear + '_RUNNING'])});
+        layer.setStyle({
+          fillColor: getColor(props[currentYear + '_RUNNING'])
+        });
 
         layer.on({
           mouseover: function(e) {
@@ -369,14 +379,16 @@
         var props = layer.feature.properties
 
         layer.bindPopup("<h5 style='font-size:18px'>" + props.COUNTY + " County, " + currentYear + "</h5>" +
-                          "<h6 style='font-size:14px'>Total House Representatives: " + props[currentYear + '_RUNNING'] + "</h6>" +
-                          "<h6 style='font-size:12px'>" + props[currentYear + '_REPS_RUNNING'] + "</h6>"
-                          );
-        layer.on('click', function (e) {
-            this.openPopup();
+          "<h6 style='font-size:14px'>Total House Representatives: " + props[currentYear + '_RUNNING'] + "</h6>" +
+          "<h6 style='font-size:12px'>" + props[currentYear + '_REPS_RUNNING'] + "</h6>"
+        );
+        layer.on('click', function(e) {
+          this.openPopup();
         });
 
-        layer.setStyle({fillColor: getColorSenate(props[currentYear + '_RUNNING'])});
+        layer.setStyle({
+          fillColor: getColorSenate(props[currentYear + '_RUNNING'])
+        });
 
         layer.on({
           mouseover: function(e) {
@@ -407,7 +419,6 @@
       });
 
     }; // end updateCounties() function
-
   </script>
 </body>
 
