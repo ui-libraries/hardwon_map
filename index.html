@@ -148,7 +148,7 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script type="text/javascript">
-    var map = L.map('map').setView([42.0667, -93.4], 8);
+    var map = L.map('map').setView([42.0667, -93.4], 7);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -244,7 +244,7 @@
         collapsed: false,
       }).addTo(map);
 
-      //map.fitBounds(houseWomen.getBounds());
+      map.fitBounds(houseWomen.getBounds());
 
       var legend = L.control({
         position: 'bottomright'
