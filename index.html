@@ -150,38 +150,50 @@
   <script type="text/javascript">
     var map = L.map('map').setView([42.0667, -93.4], 7);
 
+    /*
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    	subdomains: 'abcd',
+      maxZoom: 12,
+      minZoom: 1,
+    }).addTo(map);
+    */
+
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     	subdomains: 'abcd',
     	maxZoom: 12,
       minZoom: 1,
     }).addTo(map);
+
     /*
-        // Hydda basemap no longer works
-        L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-          attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          maxZoom: 12,
-          minZoom: 8,
-        }).addTo(map);
+    // Hydda basemap no longer works
+    L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+      attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 12,
+      minZoom: 8,
+    }).addTo(map);
     */
+
     // Add a function to style the counties by their count of female house members
     function getColor(d) {
-      return d > 13.00 ? '#0f3034' :
-        d > 9.00 ? '#1C3F44' :
-        d > 5.00 ? '#30555A' :
-        d > 3.00 ? '#466A6F' :
-        d > 2.00 ? '#668488' :
-        d > 1.00 ? '#8BA0A2' :
-        d > 0.00 ? '#C4CED0' :
+      return d > 13.00 ? '#4b4453' :
+        d > 9.00 ? '#845ec2' :
+        d > 5.00 ? '#d65db1' :
+        d > 3.00 ? '#ff6f91' :
+        d > 2.00 ? '#ff9671' :
+        d > 1.00 ? '#ffc75f' :
+        d > 0.00 ? '#f9f871' :
         '#1C00ff00';
     }
 
     // Add a function to style the counties by their count of female senate members
     function getColorSenate(d) {
-      return d > 3.00 ? '#466A6F' :
-        d > 2.00 ? '#668488' :
-        d > 1.00 ? '#8BA0A2' :
-        d > 0.00 ? '#C4CED0' :
+      return d > 5.00 ? '#d65db1' :
+        d > 3.00 ? '#ff6f91' :
+        d > 2.00 ? '#ff9671' :
+        d > 1.00 ? '#ffc75f' :
+        d > 0.00 ? '#f9f871' :
         '#1C00ff00';
     }
 
