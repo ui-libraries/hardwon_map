@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Hardwon Not Done</title>
   <link href='https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.min.css' rel='stylesheet'>
-  <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet'>
+  <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
   <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Roboto:300&display=swap" rel="stylesheet">
   <!--[if lte IE 8]>
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.ie.css" />
@@ -117,7 +117,9 @@
     }
 
     .leaflet-popup-content {
-      min-width: 350px;
+      min-width: 320px;
+      max-height: 350px;
+      overflow-y: scroll;
     }
 
 
