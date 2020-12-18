@@ -395,7 +395,7 @@
         var props = layer.feature.properties
 
         layer.bindPopup("<h5 style='font-size:18px'>" + props.COUNTY + " County, " + currentYear + "</h5>" +
-          "<h6 style='font-size:14px'>Total House Representatives: " + props[currentYear + '_RUNNING'] + "</h6>" +
+          "<h6 style='font-size:14px'>Total Senate Representatives: " + props[currentYear + '_RUNNING'] + "</h6>" +
           "<h6 style='font-size:12px'>" + props[currentYear + '_REPS_RUNNING'] + "</h6>"
         );
         layer.on('click', function(e) {
