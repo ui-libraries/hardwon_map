@@ -209,6 +209,8 @@
     // define drawMap function
     function drawMap(err, houseCounties, senateCounties) {
 
+      console.log(err);
+
       // give the layer some default properties
       var houseWomen = L.geoJson(houseCounties, {
         style: function(feature) {
